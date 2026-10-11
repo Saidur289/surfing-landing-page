@@ -241,6 +241,11 @@
   tl.to('.shade--dim', { opacity: 0.16, duration: 0.6 }, 1.8);
   reveal('.chapter--3', 2.02);
 
+  // out: the last frame dissolves into white, like riding into snow mist,
+  // so the ride hands over seamlessly to the white mountain section
+  tl.to('.chapter--3', { autoAlpha: 0, y: -30, duration: 0.2, ease: 'power2.in' }, 3.05)
+    .to('.whiteout', { opacity: 1, duration: 0.4, ease: 'power1.inOut' }, 3.1);
+
   /* ---------- Rise: mountain cut-out (JPG + alpha mask composed on a canvas) ---------- */
   const mountainWrap = document.querySelector('.rise__mountain');
   const mountainCanvas = document.getElementById('mountainCanvas');
@@ -250,15 +255,52 @@
     img.onerror = reject;
     img.src = src;
   });
+  let mountainSrc = null;
+
+  // Draw the cut-out once at the size it is shown (not always 2400px), with the soft
+  // blur on its foot baked in, so scrolling only moves a ready-made layer.
+  function composeMountain() {
+    if (!mountainSrc) return;
+    const [photo, mask] = mountainSrc;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = Math.min(photo.naturalWidth, Math.ceil(mountainWrap.offsetWidth * dpr * 1.12));
+    if (mountainWrap.classList.contains('is-ready') && Math.abs(w - mountainCanvas.width) < w * 0.15) return;
+    const h = Math.round(w * photo.naturalHeight / photo.naturalWidth);
+    mountainCanvas.width = w;
+    mountainCanvas.height = h;
+    const mctx = mountainCanvas.getContext('2d');
+    mctx.drawImage(mask, 0, 0, w, h);
+    mctx.globalCompositeOperation = 'source-in';
+    mctx.drawImage(photo, 0, 0, w, h);
+    mctx.globalCompositeOperation = 'source-over';
+
+    if ('filter' in mctx) {
+      const soft = document.createElement('canvas');
+      soft.width = w;
+      soft.height = h;
+      const sctx = soft.getContext('2d');
+      sctx.filter = `blur(${Math.round((w / mountainWrap.offsetWidth) * 14)}px)`;
+      sctx.drawImage(mountainCanvas, 0, 0);
+      sctx.filter = 'none';
+      sctx.globalCompositeOperation = 'destination-in';
+      const fade = sctx.createLinearGradient(0, h * 0.55, 0, h * 0.88);
+      fade.addColorStop(0, 'rgba(0,0,0,0)');
+      fade.addColorStop(1, 'rgba(0,0,0,1)');
+      sctx.fillStyle = fade;
+      sctx.fillRect(0, 0, w, h);
+      mctx.drawImage(soft, 0, 0);
+    }
+    mountainWrap.classList.add('is-ready');
+  }
+
   Promise.all([loadImg('assets/img/mountain.jpg'), loadImg('assets/img/mountain-mask.png')])
-    .then(([photo, mask]) => {
-      const mctx = mountainCanvas.getContext('2d');
-      mctx.drawImage(mask, 0, 0, mountainCanvas.width, mountainCanvas.height);
-      mctx.globalCompositeOperation = 'source-in';
-      mctx.drawImage(photo, 0, 0, mountainCanvas.width, mountainCanvas.height);
-      mountainWrap.classList.add('is-ready');
-    })
+    .then((imgs) => { mountainSrc = imgs; composeMountain(); })
     .catch(() => { /* fallback <img> (white sky) stays visible */ });
+  let composeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(composeTimer);
+    composeTimer = setTimeout(composeMountain, 250);
+  });
 
   // Park the name so its lower edge tucks behind the main peak (17% down the photo),
   // whatever the screen shape. Layout sizes only, so the scroll transforms don't skew it.
@@ -275,21 +317,26 @@
   window.addEventListener('resize', layoutRise);
   if (document.fonts) document.fonts.ready.then(layoutRise);
 
+  // One timeline from the moment the section enters (not just once it pins), with a
+  // little scrub lag so the parallax glides instead of tracking every wheel tick.
+  const riseSection = document.getElementById('rise');
+  const entry = Math.min(0.5, window.innerHeight / riseSection.offsetHeight);
+  const pinned = 1 - entry;
   const riseTl = gsap.timeline({
     defaults: { ease: 'none' },
     scrollTrigger: {
-      trigger: '#rise',
-      start: 'top top',
+      trigger: riseSection,
+      start: 'top bottom',
       end: 'bottom bottom',
-      scrub: lenis ? true : 0.5,
+      scrub: 0.6,
     },
   });
   riseTl
-    .fromTo('.rise__title', { yPercent: 140, scale: 0.94 }, { yPercent: 0, scale: 1, duration: 1, ease: 'power2.out' }, 0)
-    .fromTo('.rise__mountain', { yPercent: 7, scale: 1.1 }, { yPercent: 0, scale: 1, duration: 1.15, ease: 'power1.out' }, 0)
-    .fromTo('.rise__meta', { autoAlpha: 0, y: -10 }, { autoAlpha: 1, y: 0, duration: 0.3 }, 0.55)
-    .fromTo('.rise__copy .fade', { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.3, stagger: 0.08, ease: 'power2.out' }, 0.75)
-    .to({}, { duration: 0.25 });
+    .fromTo('.rise__mountain', { yPercent: 18, scale: 1.12 }, { yPercent: 0, scale: 1, duration: entry + pinned * 0.6, ease: 'power1.out' }, 0)
+    .fromTo('.rise__title', { yPercent: 140, scale: 0.94 }, { yPercent: 0, scale: 1, duration: pinned * 0.6, ease: 'power2.out' }, entry)
+    .fromTo('.rise__meta', { autoAlpha: 0, y: -10 }, { autoAlpha: 1, y: 0, duration: pinned * 0.15 }, entry + pinned * 0.32)
+    .fromTo('.rise__copy .fade', { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: pinned * 0.18, stagger: pinned * 0.04, ease: 'power2.out' }, entry + pinned * 0.45)
+    .to({}, { duration: 0.0001 }, 1);
 
   /* ---------- Field notes ---------- */
   gsap.from('.field__head > *', {
@@ -330,9 +377,10 @@
     trigger: kitList, start: 'top 80%', once: true,
     onEnter: () => kitList.classList.add('is-in'),
   });
-  gsap.from(scents.map((r) => r.children), {
-    autoAlpha: 0, y: 28, duration: 0.9, ease: 'power3.out',
-    stagger: { each: 0.03 },
+  // whole rows, not each piece of text: 4 layers to paint instead of 20
+  gsap.from(scents, {
+    autoAlpha: 0, y: 28, duration: 0.9, ease: 'power3.out', stagger: 0.09,
+    clearProps: 'opacity,visibility,transform', // hand opacity back to the CSS hover-dim
     scrollTrigger: { trigger: kitList, start: 'top 80%', once: true },
   });
   gsap.from('.kit__bundle > *, .kit__features .feature', {
@@ -426,9 +474,10 @@
   });
 
   /* ---------- Nav goes ink over the white sections ---------- */
+  // flips once the ride has mostly dissolved to white
   ScrollTrigger.create({
-    trigger: '#rise',
-    start: 'top 40px',
+    trigger: '#ride',
+    start: () => tl.scrollTrigger.start + (tl.scrollTrigger.end - tl.scrollTrigger.start) * (3.3 / 3.5),
     endTrigger: '#field',
     end: 'bottom 40px',
     toggleClass: { className: 'nav--light', targets: nav },

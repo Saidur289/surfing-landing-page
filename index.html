@@ -101,8 +101,8 @@
         <div class="rail" id="rail">
           <span class="rail__fill" id="railFill"></span>
           <button class="rail__stop is-active" data-goto="0" style="top:0%"><span class="rail__label">01</span><span class="rail__dot"></span></button>
-          <button class="rail__stop" data-goto="0.47" style="top:33.333%"><span class="rail__label">02</span><span class="rail__dot"></span></button>
-          <button class="rail__stop" data-goto="0.82" style="top:66.666%"><span class="rail__label">03</span><span class="rail__dot"></span></button>
+          <button class="rail__stop" data-goto="0.4" style="top:33.333%"><span class="rail__label">02</span><span class="rail__dot"></span></button>
+          <button class="rail__stop" data-goto="0.7" style="top:66.666%"><span class="rail__label">03</span><span class="rail__dot"></span></button>
           <span class="rail__end micro">END</span>
         </div>
 
@@ -187,6 +187,7 @@
         </article>
 
         <div class="scroll-cue micro" aria-hidden="true"><span>Scroll to ride</span><i></i></div>
+        <div class="whiteout" aria-hidden="true"></div>
       </div>
     </section>
 
@@ -205,7 +206,6 @@
           <img class="rise__fallback" src="assets/img/mountain.jpg" alt="" width="2400" height="1340">
           <canvas id="mountainCanvas" width="2400" height="1340" aria-hidden="true"></canvas>
         </div>
-        <div class="rise__blur" aria-hidden="true"></div>
         <div class="rise__fade" aria-hidden="true"></div>
 
         <div class="rise__copy">
@@ -228,7 +228,7 @@
 
       <div class="field__grid">
         <figure class="panel">
-          <div class="panel__media"><img src="assets/img/field-01.jpg" alt="Snowboarder carving hard through fresh powder under a deep blue sky" loading="lazy" style="object-position:32% center"></div>
+          <div class="panel__media"><img src="assets/img/field-01.jpg" alt="Snowboarder carving hard through fresh powder under a deep blue sky" loading="lazy" decoding="async" style="object-position:32% center"></div>
           <figcaption class="panel__cap">
             <div class="panel__top micro"><span>01</span><span>07:42 · −12°C</span></div>
             <div class="panel__bottom">
@@ -239,7 +239,7 @@
           </figcaption>
         </figure>
         <figure class="panel">
-          <div class="panel__media"><img src="assets/img/field-02.jpg" alt="Aerial view of a rider throwing spray across a wind-sculpted slope" loading="lazy" style="object-position:49% 62%"></div>
+          <div class="panel__media"><img src="assets/img/field-02.jpg" alt="Aerial view of a rider throwing spray across a wind-sculpted slope" loading="lazy" decoding="async" style="object-position:49% 62%"></div>
           <figcaption class="panel__cap">
             <div class="panel__top micro"><span>02</span><span>11:15 · −9°C</span></div>
             <div class="panel__bottom">
@@ -250,7 +250,7 @@
           </figcaption>
         </figure>
         <figure class="panel">
-          <div class="panel__media"><img src="assets/img/field-03.jpg" alt="A lone rider dropping off a corniced ridge, one track behind them" loading="lazy" style="object-position:50% 60%"></div>
+          <div class="panel__media"><img src="assets/img/field-03.jpg" alt="A lone rider dropping off a corniced ridge, one track behind them" loading="lazy" decoding="async" style="object-position:50% 60%"></div>
           <figcaption class="panel__cap">
             <div class="panel__top micro"><span>03</span><span>15:58 · −6°C</span></div>
             <div class="panel__bottom">

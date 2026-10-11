@@ -121,12 +121,12 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
   display:flex; align-items:center; gap:56px;
   padding:0 var(--gutter);
   color:#fff;
-  transition:height .3s var(--ease-out), background .3s, backdrop-filter .3s, color .3s;
+  transition:height .3s var(--ease-out), background .3s, color .3s;
 }
 .nav.is-scrolled {
   height:64px;
-  background:rgba(11,14,21,.55);
-  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  /* solid tint instead of a backdrop blur: the blur forced a GPU repaint on every frame */
+  background:rgba(11,14,21,.86);
 }
 .nav__links { display:flex; gap:40px; }
 .nav__links a {
@@ -168,7 +168,7 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
 }
 
 /* ---------- Ride (scroll-scrubbed film) ---------- */
-.ride { position:relative; height:640vh; }
+.ride { position:relative; height:730vh; }
 .no-js .ride { height:auto; }
 .ride__stage {
   position:sticky; top:0;
@@ -188,6 +188,8 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
 .shade--right { background:linear-gradient(270deg, rgba(11,14,21,.42) 0%, rgba(11,14,21,0) 48%); }
 .shade--left  { background:linear-gradient(90deg, rgba(11,14,21,.62) 0%, rgba(11,14,21,.2) 34%, rgba(11,14,21,0) 58%); opacity:0; }
 .shade--dim   { background:var(--pf-ink); opacity:0; }
+/* the ride dissolves into white so it flows straight into the mountain section */
+.whiteout { position:absolute; inset:0; z-index:7; background:#fff; opacity:0; pointer-events:none; }
 
 .grain {
   position:absolute; inset:-50%; pointer-events:none; opacity:.08; mix-blend-mode:overlay;
@@ -342,7 +344,7 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
 
 /* ---------- Nav on light sections ---------- */
 .nav.nav--light { color:var(--pf-ink); }
-.nav.nav--light.is-scrolled { background:rgba(255,255,255,.72); }
+.nav.nav--light.is-scrolled { background:rgba(255,255,255,.92); }
 .nav.nav--light .btn-pill { border-color:rgba(11,14,21,.55); }
 .nav.nav--light .btn-pill:hover { background:rgba(11,14,21,.06); }
 .nav-open .nav { color:#fff; }
@@ -398,13 +400,7 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
 .rise__mountain.is-ready canvas { opacity:1; }
 .rise__mountain.is-ready img { visibility:hidden; }
 
-/* progressive blur + white fade so the foot of the mountain melts into the page */
-.rise__blur {
-  position:absolute; z-index:3; left:0; right:0; bottom:0; height:34%;
-  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
-  -webkit-mask-image:linear-gradient(to top, #000 35%, transparent 100%);
-  mask-image:linear-gradient(to top, #000 35%, transparent 100%);
-}
+/* white fade so the foot of the mountain melts into the page (the blur is baked into the canvas) */
 .rise__fade {
   position:absolute; z-index:4; left:0; right:0; bottom:0; height:42%;
   background:linear-gradient(to top, #fff 0%, #fff 18%, rgba(255,255,255,.82) 42%, rgba(255,255,255,0) 100%);
@@ -665,7 +661,6 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
   .rise__meta { top:calc(var(--nav-h) + 12px); left:16px; right:16px; gap:12px; }
   .rise__title { font-size:33vw; line-height:.86; top:clamp(140px, 19vh, 172px); }
   .rise__title span { display:block; }
-  .rise__blur { height:30%; }
   .rise__fade { height:52%; }
   .rise__copy .tagline { font-size:1.125rem; }
 
