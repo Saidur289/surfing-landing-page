@@ -1,0 +1,4 @@
+# Source material: the site uses the optimised copies in assets/frames and assets/img
+assets/video-frame/
+assets/Gemini_Generated_Image_*.jpg
+node_modules/

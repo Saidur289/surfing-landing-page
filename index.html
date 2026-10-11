@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pine Forge Soap Co. — Earn the Shower</title>
+  <meta name="description" content="Pine Forge Soap Co. Real scent, real soap, built for men who actually shower — especially after a day on the mountain.">
+  <script>document.documentElement.className = 'js is-loading';</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600&family=Playfair+Display:ital,wght@1,400;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/frames/frame-001.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- SVG icon sprite (Lucide-style line icons, 1.5px stroke) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-mountain" viewBox="0 0 24 24"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></symbol>
+    <symbol id="i-snow" viewBox="0 0 24 24"><path d="M2 12h20"/><path d="M12 2v20"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></symbol>
+    <symbol id="i-wind" viewBox="0 0 24 24"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></symbol>
+    <symbol id="i-pine" viewBox="0 0 24 24"><path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/><path d="M12 22v-3"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+  </svg>
+
+  <!-- Loader -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <span class="logo logo--lg"><b>PINE FORGE</b><small>SOAP CO.</small></span>
+      <div class="loader__bar"><span id="loaderFill"></span></div>
+      <div class="loader__meta micro"><span>Waxing the board</span><span id="loaderPct">000</span></div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <a href="#" class="logo" aria-label="Pine Forge Soap Co. home"><b>PINE FORGE</b><small>SOAP CO.</small></a>
+    <nav aria-label="Primary">
+      <ul class="nav__links">
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Bar Soaps</a></li>
+        <li><a href="#">Bundles</a></li>
+        <li><a href="#">About Us</a></li>
+      </ul>
+    </nav>
+    <div class="nav__right">
+      <a href="#" class="btn btn-pill nav__pill">Find us at Daytona Riverfront Market <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+      <a href="#" class="bag" id="bag" aria-label="Bag, 0 items"><svg class="i"><use href="#i-bag"/></svg><span id="bagCount">(0)</span></a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <ul>
+      <li><a href="#">Shop</a></li>
+      <li><a href="#">Bar Soaps</a></li>
+      <li><a href="#">Bundles</a></li>
+      <li><a href="#">About Us</a></li>
+    </ul>
+    <a href="#" class="btn btn-pill">Find us at Daytona Riverfront Market <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+  </div>
+
+  <main>
+    <!-- Scroll-scrubbed film: 240 frames, three chapters -->
+    <section class="ride" id="ride" aria-label="The run, in three chapters">
+      <div class="ride__stage">
+        <canvas class="ride__canvas" id="frames" aria-hidden="true"></canvas>
+
+        <div class="shade shade--base"></div>
+        <div class="shade shade--right"></div>
+        <div class="shade shade--left"></div>
+        <div class="shade shade--dim"></div>
+        <div class="grain" aria-hidden="true"></div>
+
+        <!-- Viewfinder HUD -->
+        <div class="hud" aria-hidden="true">
+          <span class="bracket bracket--tl"></span>
+          <span class="bracket bracket--tr"></span>
+          <span class="bracket bracket--bl"></span>
+          <span class="bracket bracket--br"></span>
+
+          <div class="hud__meta hud__meta--left micro">
+            <span class="rec"></span>
+            <span>FRM <b id="hudFrame">001</b> / 240</span>
+            <span class="sep"></span>
+            <span>TC <b id="hudTime">00:00:00</b></span>
+          </div>
+          <div class="hud__meta hud__meta--right micro">
+            <span>ALT <b id="hudAlt">2,940</b> M</span>
+            <span class="sep"></span>
+            <span>46.41° N &nbsp;10.64° E</span>
+          </div>
+
+          <div class="progress-x"><span id="progressX"></span></div>
+        </div>
+
+        <div class="rail" id="rail">
+          <span class="rail__fill" id="railFill"></span>
+          <button class="rail__stop is-active" data-goto="0" style="top:0%"><span class="rail__label">01</span><span class="rail__dot"></span></button>
+          <button class="rail__stop" data-goto="0.47" style="top:33.333%"><span class="rail__label">02</span><span class="rail__dot"></span></button>
+          <button class="rail__stop" data-goto="0.82" style="top:66.666%"><span class="rail__label">03</span><span class="rail__dot"></span></button>
+          <span class="rail__end micro">END</span>
+        </div>
+
+        <!-- 01 · THE DROP -->
+        <article class="chapter chapter--1">
+          <div class="chapter__copy">
+            <span class="eyebrow fade">01 · The Drop</span>
+            <h1 class="display display--xl">
+              <span class="line"><span>Cold air.</span></span>
+              <span class="line"><span>Fresh lines.</span></span>
+              <span class="line"><span>No excuses.</span></span>
+            </h1>
+            <span class="rule"></span>
+            <p class="tagline fade">First chair, first tracks.<br>The shower can wait. Barely.</p>
+          </div>
+
+          <ul class="features chapter__features">
+            <li class="feature fade"><svg class="i"><use href="#i-mountain"/></svg><p>Start gate<span>2,940 M</span></p></li>
+            <li class="feature fade"><svg class="i"><use href="#i-snow"/></svg><p>Fresh snow<span>38 CM overnight</span></p></li>
+            <li class="feature fade"><svg class="i"><use href="#i-wind"/></svg><p>Wind NW<span>12 KM/H</span></p></li>
+          </ul>
+        </article>
+
+        <!-- 02 · THE RIDGE -->
+        <article class="chapter chapter--2">
+          <div class="chapter__copy">
+            <span class="eyebrow fade">02 · The Ridge</span>
+            <h2 class="display display--lg">
+              <span class="line"><span>One ridge.</span></span>
+              <span class="line"><span>One rider.</span></span>
+              <span class="line"><span>No shortcuts.</span></span>
+            </h2>
+            <span class="rule"></span>
+            <p class="tagline fade">Four hours up. Forty seconds down.<br>Worth every step.</p>
+            <p class="body fade">No lifts past this point. Just a skin track, a cold thermos and a line nobody has touched since Tuesday's storm.</p>
+          </div>
+
+          <figure class="route fade">
+            <figcaption class="route__head micro"><span>Route profile</span><span>North ridge</span></figcaption>
+            <svg class="route__svg" viewBox="0 0 320 110" preserveAspectRatio="none" aria-hidden="true">
+              <line class="route__grid" x1="0" x2="320" y1="10" y2="10"/>
+              <line class="route__grid" x1="0" x2="320" y1="53" y2="53"/>
+              <line class="route__grid" x1="0" x2="320" y1="96" y2="96"/>
+              <path class="route__ghost" d="M0 96 L24 91 L44 93 L66 81 L88 83 L108 69 L128 72 L150 57 L172 61 L194 45 L216 49 L238 33 L260 37 L282 21 L302 25 L320 10"/>
+              <path class="route__path" id="routePath" d="M0 96 L24 91 L44 93 L66 81 L88 83 L108 69 L128 72 L150 57 L172 61 L194 45 L216 49 L238 33 L260 37 L282 21 L302 25 L320 10"/>
+              <line class="route__cursor" id="routeCursor" x1="0" x2="0" y1="0" y2="110"/>
+              <circle class="route__dot" id="routeDot" cx="0" cy="96" r="3"/>
+            </svg>
+            <div class="route__foot micro">
+              <span>2,940 M</span>
+              <span class="route__read">KM <b id="routeKm">0.0</b> · <b id="routeAlt">2,940</b> M</span>
+              <span>3,212 M</span>
+            </div>
+          </figure>
+        </article>
+
+        <!-- 03 · THE SUMMIT -->
+        <article class="chapter chapter--3">
+          <div class="chapter__copy">
+            <span class="eyebrow fade">03 · The Summit</span>
+            <h2 class="display display--xl">
+              <span class="line"><span>Earn the view.</span></span>
+              <span class="line"><span>Earn the shower.</span></span>
+            </h2>
+            <span class="rule"></span>
+            <p class="tagline fade">Built for men who actually shower. Especially after this.</p>
+
+            <ul class="stats">
+              <li class="stat fade"><b>3,212 M</b><span>Summit</span></li>
+              <li class="stat fade"><b>1,180 M</b><span>Vertical</span></li>
+              <li class="stat fade"><b>−14°C</b><span>At the top</span></li>
+            </ul>
+            <a href="#" class="btn btn-outline fade only-mobile">Shop the après kit <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+          </div>
+
+          <div class="drop fade">
+            <span class="eyebrow">After the run</span>
+            <p class="drop__title">Alpine Cold</p>
+            <p class="descriptor">Glacier Mint &amp; Black Pine Scent</p>
+            <a href="#" class="btn btn-outline">Shop now <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+          </div>
+        </article>
+
+        <div class="scroll-cue micro" aria-hidden="true"><span>Scroll to ride</span><i></i></div>
+      </div>
+    </section>
+
+    <!-- Name rising from behind the mountain -->
+    <section class="rise" id="rise" aria-label="Pine Forge">
+      <div class="rise__stage">
+        <div class="rise__meta micro" aria-hidden="true">
+          <span>Summit <b>3,212 M</b></span>
+          <i></i>
+          <span>Clear <b>−14°C</b></span>
+        </div>
+
+        <h2 class="rise__title" aria-label="Pine Forge"><span>Pine</span> <span>Forge</span></h2>
+
+        <div class="rise__mountain">
+          <img class="rise__fallback" src="assets/img/mountain.jpg" alt="" width="2400" height="1340">
+          <canvas id="mountainCanvas" width="2400" height="1340" aria-hidden="true"></canvas>
+        </div>
+        <div class="rise__blur" aria-hidden="true"></div>
+        <div class="rise__fade" aria-hidden="true"></div>
+
+        <div class="rise__copy">
+          <span class="eyebrow fade">Born above the treeline</span>
+          <p class="tagline fade">Made for men who climb before they shower.</p>
+          <a href="#" class="btn btn-outline-dark fade">Shop the range <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Field notes: three frames, edge to edge -->
+    <section class="field" id="field" aria-labelledby="fieldTitle">
+      <header class="field__head">
+        <div>
+          <span class="eyebrow">Field notes</span>
+          <h2 class="display display--lg" id="fieldTitle">Three lines.<br>One long day.</h2>
+        </div>
+        <p class="tagline">Shot between first chair and last light.<br>No filters. Just cold hands.</p>
+      </header>
+
+      <div class="field__grid">
+        <figure class="panel">
+          <div class="panel__media"><img src="assets/img/field-01.jpg" alt="Snowboarder carving hard through fresh powder under a deep blue sky" loading="lazy" style="object-position:32% center"></div>
+          <figcaption class="panel__cap">
+            <div class="panel__top micro"><span>01</span><span>07:42 · −12°C</span></div>
+            <div class="panel__bottom">
+              <span class="panel__rule"></span>
+              <p class="panel__title">The Carve</p>
+              <p class="descriptor">Edge in. Everything else out.</p>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="panel">
+          <div class="panel__media"><img src="assets/img/field-02.jpg" alt="Aerial view of a rider throwing spray across a wind-sculpted slope" loading="lazy" style="object-position:49% 62%"></div>
+          <figcaption class="panel__cap">
+            <div class="panel__top micro"><span>02</span><span>11:15 · −9°C</span></div>
+            <div class="panel__bottom">
+              <span class="panel__rule"></span>
+              <p class="panel__title">The Spray</p>
+              <p class="descriptor">Forty seconds of pure noise.</p>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="panel">
+          <div class="panel__media"><img src="assets/img/field-03.jpg" alt="A lone rider dropping off a corniced ridge, one track behind them" loading="lazy" style="object-position:50% 60%"></div>
+          <figcaption class="panel__cap">
+            <div class="panel__top micro"><span>03</span><span>15:58 · −6°C</span></div>
+            <div class="panel__bottom">
+              <span class="panel__rule"></span>
+              <p class="panel__title">The Ridge Line</p>
+              <p class="descriptor">One track. Nobody else's.</p>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="field__foot micro">
+        <span>3 frames</span><i></i><span>North ridge</span><i></i><span>46.41° N · 10.64° E</span>
+        <a href="#" class="btn btn-text">Shop the après kit <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+      </div>
+    </section>
+
+    <!-- The après kit: scent index -->
+    <section class="kit" id="kit" aria-labelledby="kitTitle">
+      <header class="kit__head">
+        <div>
+          <span class="eyebrow">The après kit</span>
+          <h2 class="display display--lg" id="kitTitle">Come down.<br>Clean up.</h2>
+        </div>
+        <p class="tagline">Four bars for the hour after the last run.<br>Pick one. Or don't, and stay like that.</p>
+      </header>
+
+      <ol class="kit__list">
+        <li class="scent" data-img="assets/img/field-03.jpg">
+          <span class="scent__no micro">01</span>
+          <div class="scent__name">
+            <img class="scent__thumb" src="assets/img/field-03.jpg" alt="" loading="lazy">
+            <h3>Alpine Cold</h3>
+            <p class="descriptor">Glacier Mint &amp; Black Pine</p>
+          </div>
+          <p class="scent__notes micro">Cold<br><span>Sharp. Wakes you up.</span></p>
+          <p class="scent__price">$14</p>
+          <button class="scent__add btn" type="button" aria-label="Add Alpine Cold to bag"><span>Add</span><svg class="i arrow"><use href="#i-arrow"/></svg></button>
+        </li>
+        <li class="scent" data-img="assets/frames/frame-200.jpg">
+          <span class="scent__no micro">02</span>
+          <div class="scent__name">
+            <img class="scent__thumb" src="assets/frames/frame-200.jpg" alt="" loading="lazy">
+            <h3>Barrel Aged</h3>
+            <p class="descriptor">Smoky Vanilla &amp; Aged Leather</p>
+          </div>
+          <p class="scent__notes micro">Warm<br><span>The lodge, bottled.</span></p>
+          <p class="scent__price">$14</p>
+          <button class="scent__add btn" type="button" aria-label="Add Barrel Aged to bag"><span>Add</span><svg class="i arrow"><use href="#i-arrow"/></svg></button>
+        </li>
+        <li class="scent" data-img="assets/img/field-01.jpg">
+          <span class="scent__no micro">03</span>
+          <div class="scent__name">
+            <img class="scent__thumb" src="assets/img/field-01.jpg" alt="" loading="lazy">
+            <h3>First Chair</h3>
+            <p class="descriptor">Black Coffee &amp; Fir Needle</p>
+          </div>
+          <p class="scent__notes micro">Bold<br><span>For 6 a.m. people.</span></p>
+          <p class="scent__price">$14</p>
+          <button class="scent__add btn" type="button" aria-label="Add First Chair to bag"><span>Add</span><svg class="i arrow"><use href="#i-arrow"/></svg></button>
+        </li>
+        <li class="scent" data-img="assets/img/field-02.jpg">
+          <span class="scent__no micro">04</span>
+          <div class="scent__name">
+            <img class="scent__thumb" src="assets/img/field-02.jpg" alt="" loading="lazy">
+            <h3>Summit Smoke</h3>
+            <p class="descriptor">Cedar, Campfire &amp; Clove</p>
+          </div>
+          <p class="scent__notes micro">Smoky<br><span>Last chair, first fire.</span></p>
+          <p class="scent__price">$14</p>
+          <button class="scent__add btn" type="button" aria-label="Add Summit Smoke to bag"><span>Add</span><svg class="i arrow"><use href="#i-arrow"/></svg></button>
+        </li>
+      </ol>
+
+      <div class="kit__bundle">
+        <div class="kit__bundle-copy">
+          <span class="eyebrow">Bundle</span>
+          <p class="kit__bundle-title">All four. One box. <b>$48</b></p>
+          <p class="descriptor">Save $8. Enough soap for a whole season of bad decisions.</p>
+        </div>
+        <a href="#" class="btn btn-outline">Shop the bundle <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+      </div>
+
+      <ul class="features kit__features">
+        <li class="feature"><svg class="i"><use href="#i-pine"/></svg><p>Pine scented<span>Bold. Clean.</span></p></li>
+        <li class="feature"><svg class="i"><use href="#i-leaf"/></svg><p>Natural oils<span>No junk.</span></p></li>
+        <li class="feature"><svg class="i"><use href="#i-shield"/></svg><p>Handmade in USA<span>Built to last.</span></p></li>
+      </ul>
+
+      <div class="kit__preview" aria-hidden="true"><img alt=""></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="footer__join">
+      <div class="footer__join-copy">
+        <span class="eyebrow">The crew</span>
+        <h2 class="display display--lg">Join the crew.</h2>
+        <p class="tagline">New scents, market dates and the odd snow report.<br>No spam. We're too busy outside.</p>
+      </div>
+      <form class="join" id="joinForm" novalidate>
+        <label class="micro" for="joinEmail">Email address</label>
+        <div class="join__row">
+          <input id="joinEmail" name="email" type="email" autocomplete="email" placeholder="you@basecamp.com" required>
+          <button class="btn btn-outline" type="submit">Sign me up <svg class="i arrow"><use href="#i-arrow"/></svg></button>
+        </div>
+        <p class="join__msg micro" id="joinMsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <svg class="footer__ridge" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path id="footerRidge" d="M0 112 L90 96 L150 102 L230 74 L290 84 L370 52 L420 64 L480 40 L540 58 L610 30 L660 44 L720 12 L780 38 L850 26 L900 50 L980 34 L1040 60 L1110 46 L1180 72 L1250 62 L1330 88 L1390 82 L1440 98"/>
+    </svg>
+
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="#" class="logo logo--lg" aria-label="Pine Forge Soap Co. home"><b>PINE FORGE</b><small>SOAP CO.</small></a>
+        <p class="descriptor">Real scent. Real soap.<br>Built for men who actually shower.</p>
+        <ul class="footer__social micro">
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </div>
+      <nav class="footer__col" aria-label="Shop">
+        <p class="footer__label micro">Shop</p>
+        <ul>
+          <li><a href="#">Bar Soaps</a></li>
+          <li><a href="#">Bundles</a></li>
+          <li><a href="#">Gift Sets</a></li>
+          <li><a href="#">New Drops</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Company">
+        <p class="footer__label micro">Company</p>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Oils</a></li>
+          <li><a href="#">Wholesale</a></li>
+          <li><a href="#">Journal</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Help">
+        <p class="footer__label micro">Help</p>
+        <ul>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="footer__col">
+        <p class="footer__label micro">Visit</p>
+        <address>
+          Daytona Riverfront Market<br>
+          Corner of Beach St. &amp; Orange Ave<br>
+          Daytona Beach, FL
+        </address>
+        <p class="footer__hours micro">Sat – Sun<span>9 AM – 3 PM</span></p>
+      </div>
+    </div>
+
+    <div class="infobar micro">
+      <p><span>© 2026 Pine Forge Soap Co.</span><i></i><span>Handmade in USA</span></p>
+      <p><span>@pineforgesoapco</span><i></i><span>pineforgesoapco.com</span><i></i><button class="to-top" id="toTop" type="button">Back to top <svg class="i arrow"><use href="#i-arrow"/></svg></button></p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
